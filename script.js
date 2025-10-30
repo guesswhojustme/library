@@ -52,7 +52,6 @@ function displayBooks(library){
 console.log(displayBooks(myLibrary));
 console.log(defaultBook.author);
 
-
 addBookBtn.addEventListener('click', () => {
   myLibrary.push(addBookToLibrary(title.value, author.value, pages.value, bookID))
   console.log(addBookToLibrary(title.value, author.value, pages.value, bookID));
@@ -66,6 +65,29 @@ addBookBtn.addEventListener('click', () => {
   newBookDiv.id = "book-div";
   newDiv.appendChild(newBookDiv);
 
+  const newBtn1 = document.createElement('button');
+  newBtn1.textContent = "haven't read";
+  const newBtn2 = document.createElement('button');
+  newBtn2.textContent = "reading";
+  const newBtn3 = document.createElement('button');
+  newBtn3.textContent = "done reading";
+  const newBtn4 = document.createElement('button');
+  newBtn4.textContent = "Delete";
+
+  const newBtnDiv = document.createElement('div');
+  newBtnDiv.id = 'buttons-div';
+  newDiv.appendChild(newBtnDiv);
+
+  const first3BtnDiv = document.createElement('div');
+  first3BtnDiv.style.display = 'flex';
+  first3BtnDiv.style.gap = '20px';
+  newBtnDiv.appendChild(first3BtnDiv);
+
+  first3BtnDiv.appendChild(newBtn1);
+  first3BtnDiv.appendChild(newBtn2);
+  first3BtnDiv.appendChild(newBtn3);
+  newBtnDiv.appendChild(newBtn4);
+  
   const newBookAuthor = document.createElement('span');
   newBookAuthor.textContent = author.value;
   const newBookTitle = document.createElement('span');
