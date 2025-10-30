@@ -34,7 +34,7 @@ body{
     font-size: 1.5rem;
 }
 
-.books-container > div:first-child + div{
+#book-div{
     display: flex;
     justify-content: space-between;
     align-items: center;
