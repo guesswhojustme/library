@@ -1,3 +1,9 @@
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('page');
+const addBookBtn = document.getElementById('add-book')
+
+
 const bookID = crypto.randomUUID();
 
 function Book(title, author, page, id) {
@@ -31,9 +37,12 @@ function displayBooks(library){
 myLibrary.push(addBookToLibrary('Test', 'Test', 123))
 myLibrary.push(addBookToLibrary('Test1', 'Test1', 1234))
 
-
 console.log(displayBooks(myLibrary));
 
-
+addBookBtn.addEventListener('click', () => {
+  myLibrary.push(addBookToLibrary(title.value, author.value, pages.value, bookID))
+  console.log(addBookToLibrary(title.value, author.value, pages.value, bookID));
+  console.log(displayBooks(myLibrary));
+})
 
 
