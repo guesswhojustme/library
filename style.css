@@ -17,9 +17,13 @@ body{
     --dark-gray: #9d9d9d; 
 }
 
+h1{
+    padding-top: 40px;
+}
+
 .books-container{
     width: var(--width);
-
+    padding-top: 50px;
 }
 
 .books-container > div:first-child{
@@ -34,6 +38,7 @@ body{
     font-size: 1.5rem;
 }
 
+
 #book-div{
     display: flex;
     justify-content: space-between;
@@ -41,14 +46,15 @@ body{
     width: var(--width);
     height: 50px;
     background-color: var(--gray);
-    border: solid 2px black;
+    /* border: solid 2px black; */
     padding: 0 20px 0 20px;
+    box-shadow: black 5px 4px;
 }
 
 #buttons-div{
     display: flex;
     justify-content: space-between;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 #buttons-div > div {
@@ -59,19 +65,22 @@ body{
 #hr, #r, #dr {
     width: 100px;
     cursor: pointer;
+    border: none;
 }
-
 #hr {
     background-color: var(--gray);
+
 }
 
 #r, #dr{
     background-color: var(--dark-gray);
 }
 
-#dr {
+#dr{
     color: white;
 }
+
+
 
 #dlt{
     background-color: black;
@@ -82,7 +91,7 @@ body{
 
 .input-container{
     position: absolute;
-    top: 10px;
+    top: 0.5in;
     right: 1.5in;
     display: flex;
     flex-direction: column;
@@ -111,3 +120,4 @@ body{
     background-color: #d9d9d9;
     cursor: pointer;
 }
+
