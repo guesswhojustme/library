@@ -40,7 +40,8 @@ body{
     align-items: center;
     width: var(--width);
     height: 50px;
-    background-color: var(--dark-gray);
+    background-color: var(--gray);
+    border: solid 2px black;
     padding: 0 20px 0 20px;
 }
 
@@ -50,9 +51,33 @@ body{
     padding-top: 5px;
 }
 
-.buttons-div > div {
+#buttons-div > div {
     display: flex;
     gap: 20px;
+}
+
+#hr, #r, #dr {
+    width: 100px;
+    cursor: pointer;
+}
+
+#hr {
+    background-color: var(--gray);
+}
+
+#r, #dr{
+    background-color: var(--dark-gray);
+}
+
+#dr {
+    color: white;
+}
+
+#dlt{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    width: 100px;
 }
 
 .input-container{
@@ -64,3 +89,25 @@ body{
     align-items: center;
 }
 
+.input-container > form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+
+.input-container > form > input{
+    height: 30px;
+    width: 200px;
+    font-size: 0.85rem;
+}
+
+.input-container > form > label{
+    font-size: 1.1rem;
+}
+
+#add-book{
+    margin-top: 10px;
+    width: 100px;
+    background-color: #d9d9d9;
+    cursor: pointer;
+}

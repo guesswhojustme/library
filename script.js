@@ -4,8 +4,7 @@ const pages = document.getElementById('page');
 const addBookBtn = document.getElementById('add-book');
 const bookDiv = document.getElementById('book-div');
 const bookContainer = document.querySelector('.books-container')
-
-const bookID = crypto.randomUUID();
+const form = document.getElementById('form');
 
 function Book(title, author, page, id) {
   if (!new.target) {
@@ -21,7 +20,8 @@ Book.prototype.showBookInfo = function () {
   return `Title: ${this.title}, Author: ${this.author}, Pages: ${this.page}`;
 }
 
-const defaultBook = new Book('The Chronicles of Narnia', 'C.S. Lewis', '768', bookID);
+const defaultBook = new Book('The Chronicles of Narnia', 'C.S. Lewis', '768', crypto.randomUUID());
+const defaultBook1 = new Book('The Chronicles of Narnia', 'C.S. Lewis', '768', crypto.randomUUID());
 
 const defaultBookAuthor = document.createElement('span');
 defaultBookAuthor.textContent = defaultBook.author;
@@ -34,13 +34,7 @@ bookDiv.appendChild(defaultBookAuthor)
 bookDiv.appendChild(defaultBookTitle)
 bookDiv.appendChild(defaultBookPage)
 
-function addBookToLibrary(title, author, page){
-    const addedBook = new Book(title, author, page, bookID)
- 
-    return addedBook;
-}
-
-const myLibrary = [defaultBook];
+let myLibrary = [defaultBook];
 
 function displayBooks(library){
   for(i = 0; i < library.length; i++){
@@ -50,14 +44,17 @@ function displayBooks(library){
 }
 
 console.log(displayBooks(myLibrary));
-console.log(defaultBook.author);
 
 addBookBtn.addEventListener('click', () => {
-  myLibrary.push(addBookToLibrary(title.value, author.value, pages.value, bookID))
-  console.log(addBookToLibrary(title.value, author.value, pages.value, bookID));
+  const newBook = new Book(title.value, author.value, pages.value, crypto.randomUUID());
+  myLibrary.push(newBook);
+
+  console.log(newBook);
   console.log(displayBooks(myLibrary));
 
   const newDiv = document.createElement('div');
+  newDiv.id = newBook.id
+  console.log(`new div id: ${newDiv.id}`);
   newDiv.style.paddingTop = "20px"
   bookContainer.appendChild(newDiv);
 
@@ -67,20 +64,58 @@ addBookBtn.addEventListener('click', () => {
 
   const newBtn1 = document.createElement('button');
   newBtn1.textContent = "haven't read";
+  newBtn1.id = 'hr'
   const newBtn2 = document.createElement('button');
   newBtn2.textContent = "reading";
+  newBtn2.id = 'r'
   const newBtn3 = document.createElement('button');
   newBtn3.textContent = "done reading";
+  newBtn3.id = 'dr'
   const newBtn4 = document.createElement('button');
-  newBtn4.textContent = "Delete";
+  newBtn4.textContent = "Remove";
+  newBtn4.style.backgroundColor = "black";
+  newBtn4.style.color = "white";
+  newBtn4.style.width = "100px";
+  newBtn4.style.cursor = "pointer";
 
+  newBtn1.addEventListener('click', () => {
+  console.log("havent read button 'clicked'");
+  newBookDiv.style.backgroundColor = "#d9d9d9";
+  newBookTitle.style.color = "black";
+  newBookAuthor.style.color = "black";
+  newBookPage.style.color = "black";
+  })
+
+  newBtn2.addEventListener('click', () => {
+  console.log("reading button 'clicked'");
+  newBookTitle.style.color = "black";
+  newBookAuthor.style.color = "black";
+  newBookPage.style.color = "black";
+  newBookDiv.style.backgroundColor = "#9d9d9d"
+  })
+
+  newBtn3.addEventListener('click', () => {
+  console.log("done reading button 'clicked'");
+  newBookDiv.style.backgroundColor = "#9d9d9d";
+  newBookTitle.style.color = "white";
+  newBookAuthor.style.color = "white";
+  newBookPage.style.color = "white";
+  });
+
+  newBtn4.addEventListener('click', () => {
+  console.log("Remove button 'clicked'");
+  newBtn4.id = newDiv.id
+  myLibrary = myLibrary.filter(book => book.id !== newBtn4.id)
+  console.log(newBtn4.id);
+  console.log(displayBooks(myLibrary));
+  newDiv.remove();
+  })
+  
   const newBtnDiv = document.createElement('div');
   newBtnDiv.id = 'buttons-div';
   newDiv.appendChild(newBtnDiv);
 
   const first3BtnDiv = document.createElement('div');
-  first3BtnDiv.style.display = 'flex';
-  first3BtnDiv.style.gap = '20px';
   newBtnDiv.appendChild(first3BtnDiv);
 
   first3BtnDiv.appendChild(newBtn1);
@@ -99,6 +134,5 @@ addBookBtn.addEventListener('click', () => {
   newBookDiv.appendChild(newBookTitle);
   newBookDiv.appendChild(newBookPage);
 
+  form.reset();
 })
-
-
