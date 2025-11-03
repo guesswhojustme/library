@@ -38,25 +38,14 @@ bookDiv.appendChild(defaultBookPage)
 
 let myLibrary = [defaultBook];
 
-function displayBooks(library){
-  for(i = 0; i < library.length; i++){
-    library[i]
-  }
-  return library;
-}
-
-console.log(displayBooks(myLibrary));
-
 addBookBtn.addEventListener('click', () => {
   const newBook = new Book(title.value, author.value, pages.value, crypto.randomUUID());
   myLibrary.push(newBook);
 
-  console.log(newBook);
-  console.log(displayBooks(myLibrary));
+  console.log(myLibrary);
 
   const newDiv = document.createElement('div');
   newDiv.id = newBook.id
-  console.log(`new div id: ${newDiv.id}`);
   newDiv.style.paddingTop = "20px"
   bookContainer.appendChild(newDiv);
 
@@ -79,6 +68,18 @@ addBookBtn.addEventListener('click', () => {
   newBtn4.style.color = "white";
   newBtn4.style.width = "100px";
   newBtn4.style.cursor = "pointer";
+
+  const newBtnDiv = document.createElement('div');
+  newBtnDiv.id = 'buttons-div';
+  newDiv.appendChild(newBtnDiv);
+
+  const first3BtnDiv = document.createElement('div');
+  newBtnDiv.appendChild(first3BtnDiv);
+
+  first3BtnDiv.appendChild(newBtn1);
+  first3BtnDiv.appendChild(newBtn2);
+  first3BtnDiv.appendChild(newBtn3);
+  newBtnDiv.appendChild(newBtn4);
 
   newBtn1.addEventListener('click', () => {
   console.log("havent read button 'clicked'");
@@ -108,22 +109,9 @@ addBookBtn.addEventListener('click', () => {
   console.log("Remove button 'clicked'");
   newBtn4.id = newDiv.id
   myLibrary = myLibrary.filter(book => book.id !== newBtn4.id)
-  console.log(newBtn4.id);
-  console.log(displayBooks(myLibrary));
+  console.log(myLibrary);
   newDiv.remove();
   })
-  
-  const newBtnDiv = document.createElement('div');
-  newBtnDiv.id = 'buttons-div';
-  newDiv.appendChild(newBtnDiv);
-
-  const first3BtnDiv = document.createElement('div');
-  newBtnDiv.appendChild(first3BtnDiv);
-
-  first3BtnDiv.appendChild(newBtn1);
-  first3BtnDiv.appendChild(newBtn2);
-  first3BtnDiv.appendChild(newBtn3);
-  newBtnDiv.appendChild(newBtn4);
   
   const newBookAuthor = document.createElement('span');
   newBookAuthor.textContent = author.value;

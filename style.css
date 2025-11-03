@@ -80,7 +80,38 @@ h1{
     color: white;
 }
 
+#hr:hover{
+    width: 150px;
+    font-size: 1rem;
+    box-shadow: black 10px 10px;
+}
 
+#hr:active{
+    width: 150px;
+    box-shadow: none;
+}
+
+#dr:hover{
+    width: 150px;
+    font-size: 1rem;
+    box-shadow: black 10px 10px;
+}
+
+#dr:active{
+    width: 150px;
+    box-shadow: none;
+}
+
+#r:hover{
+    width: 150px;
+    font-size: 1rem;
+    box-shadow: black 10px 10px;
+}
+
+#r:active{
+    width: 150px;
+    box-shadow: none;
+}
 
 #dlt{
     background-color: black;
@@ -89,19 +120,12 @@ h1{
     width: 100px;
 }
 
-.input-container{
-    position: absolute;
-    top: 0.5in;
-    right: 1.5in;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .input-container > form{
+    width: var(--width);
     display: flex;
-    flex-direction: column;
-    gap: 5px
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px
 }
 
 .input-container > form > input{
@@ -115,7 +139,9 @@ h1{
 }
 
 #add-book{
-    margin-top: 10px;
+    position: relative;
+    bottom: 25px;
+    left: 9.5in;
     width: 100px;
     background-color: #d9d9d9;
     cursor: pointer;

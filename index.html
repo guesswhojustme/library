@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Book Library</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,6 +16,17 @@
                 <span id="titleDefault">Title</span>
                 <span>Pages</span>
             </div>
+        <div class="input-container">
+            <form action="" id="form">
+                <!-- <label for="author">Author</label> -->
+                <input type="text" name="author" id="author" required>
+                <!-- <label for="title">Title</label> -->
+                <input type="text" name="title" id="title" required>
+                <!-- <label for="page">Pages</label> -->
+                <input type="number" name="page" id="page" required>
+            </form>
+            <button id="add-book">add book</button>
+       </div>
             <div>
                 <div id="book-div">
                 </div>
@@ -28,18 +39,6 @@
                     <button id="dlt">Remove</button>
                 </div>
             </div>
-       </div>
-       <div class="input-container">
-        <h2>New Book</h2>
-            <form action="" id="form">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" required>
-                <label for="author">Author</label>
-                <input type="text" name="author" id="author" required>
-                <label for="page">Pages</label>
-                <input type="number" name="page" id="page" required>
-            </form>
-            <button id="add-book">add book</button>
        </div>
     </div>
 </body>
