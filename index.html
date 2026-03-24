@@ -15,12 +15,18 @@
                 <label for="author">Author</label>
                 <label for="title">Title</label>
                 <label for="page">Pages</label>
+                <label for="status">Status</label>
             </div>
         <div class="input-container">
             <form action="" id="form">
                 <input type="text" name="author" id="author" required>
                 <input type="text" name="title" id="title" required>
                 <input type="number" name="page" id="page" required>
+                <select name="status" id="status">
+                    <option value="done reading">Done reading</option>
+                    <option value="reading">Reading</option>
+                    <option value="haven't read">Haven't read</option>
+                </select>
             </form>
             <button id="add-book">add book</button>
        </div>

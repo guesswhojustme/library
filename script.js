@@ -1,48 +1,57 @@
 const title = document.getElementById('title');
 const author = document.getElementById('author');
 const pages = document.getElementById('page');
+const readingStatus = document.getElementById('status');
 const addBookBtn = document.getElementById('add-book');
 const bookDiv = document.getElementById('book-div');
 const bookContainer = document.querySelector('.books-container')
 const form = document.getElementById('form');
 
-function Book(title, author, page, id) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+  constructor(title, author, page, id, status){
+    this.title = title;
+    this.author = author; 
+    this.page = page;
+    this.id = id;
+    this.status = status;
   }
-  this.title = title;
-  this.author = author; 
-  this.page = page;
-  this.id = id;
+
 }
 
 Book.prototype.showBookInfo = function () {
   return `Title: ${this.title}, Author: ${this.author}, Pages: ${this.page}`;
 }
 
-const defaultBook = new Book('The Chronicles of Narnia', 'C.S. Lewis', '768', crypto.randomUUID());
-const defaultBook1 = new Book('The Chronicles of Narnia', 'C.S. Lewis', '768', crypto.randomUUID());
+let myLibrary = [];
 
-const defaultBookAuthor = document.createElement('span');
-defaultBookAuthor.textContent = defaultBook.author;
-const defaultBookTitle = document.createElement('span')
-defaultBookTitle.style.fontWeight = "bold";
-defaultBookTitle.style.fontSize = "1.15rem";
-defaultBookTitle.textContent = defaultBook.title;
-const defaultBookPage = document.createElement('span')
-defaultBookPage.textContent = defaultBook.page;
+const defaultBook = new Book('The Chronicles of Narnia', 'C.S. Lewis', '768', crypto.randomUUID(), 'read');
 
-bookDiv.appendChild(defaultBookAuthor)
-bookDiv.appendChild(defaultBookTitle)
-bookDiv.appendChild(defaultBookPage)
+myLibrary.push(defaultBook)
 
-let myLibrary = [defaultBook];
+function displayDefaultBook(){
+    const defaultBookAuthor = document.createElement('span');
+    defaultBookAuthor.textContent = defaultBook.author;
 
-addBookBtn.addEventListener('click', () => {
-  const newBook = new Book(title.value, author.value, pages.value, crypto.randomUUID());
+    const defaultBookTitle = document.createElement('span')
+    defaultBookTitle.classList.add('bookStyle')
+    defaultBookTitle.textContent = defaultBook.title;
+
+    const defaultBookPage = document.createElement('span')
+    defaultBookPage.textContent = defaultBook.page;
+
+    bookDiv.append(defaultBookAuthor, defaultBookTitle, defaultBookPage)
+}
+
+displayDefaultBook();
+
+function addBookToLibrary() {
+  if(title.value == '' || author.value == '' || pages.value == '') {
+    alert("MISSING INPUT!");
+    return
+  }
+
+  const newBook = new Book(title.value, author.value, pages.value, crypto.randomUUID(), readingStatus.value)
   myLibrary.push(newBook);
-
-  console.log(myLibrary);
 
   const newDiv = document.createElement('div');
   newDiv.id = newBook.id
@@ -63,11 +72,8 @@ addBookBtn.addEventListener('click', () => {
   newBtn3.textContent = "done reading";
   newBtn3.id = 'dr'
   const newBtn4 = document.createElement('button');
-  newBtn4.textContent = "Remove";
-  newBtn4.style.backgroundColor = "black";
-  newBtn4.style.color = "white";
-  newBtn4.style.width = "100px";
-  newBtn4.style.cursor = "pointer";
+  newBtn4.textContent = "remove"
+  newBtn4.classList.add('btn4Style')
 
   const newBtnDiv = document.createElement('div');
   newBtnDiv.id = 'buttons-div';
@@ -76,55 +82,83 @@ addBookBtn.addEventListener('click', () => {
   const first3BtnDiv = document.createElement('div');
   newBtnDiv.appendChild(first3BtnDiv);
 
-  first3BtnDiv.appendChild(newBtn1);
-  first3BtnDiv.appendChild(newBtn2);
-  first3BtnDiv.appendChild(newBtn3);
+  first3BtnDiv.append(newBtn1, newBtn2, newBtn3)
   newBtnDiv.appendChild(newBtn4);
 
   newBtn1.addEventListener('click', () => {
-  console.log("havent read button 'clicked'");
-  newBookDiv.style.backgroundColor = "#d9d9d9";
-  newBookTitle.style.color = "black";
-  newBookAuthor.style.color = "black";
-  newBookPage.style.color = "black";
+    console.log("havent read button 'clicked'");
+    myLibrary.forEach(book => {
+      if(book.id == newDiv.id){
+        book.status = "havent read"
+      }
+    })
+    newBookDiv.style.backgroundColor = "#d9d9d9";
+    newBookTitle.style.color = "black";
+    newBookAuthor.style.color = "black";
+    newBookPage.style.color = "black";
+    displayBook();
   })
 
   newBtn2.addEventListener('click', () => {
-  console.log("reading button 'clicked'");
-  newBookTitle.style.color = "black";
-  newBookAuthor.style.color = "black";
-  newBookPage.style.color = "black";
-  newBookDiv.style.backgroundColor = "#9d9d9d"
+    console.log("reading button 'clicked'");
+    myLibrary.forEach(book => {
+      if(book.id == newDiv.id){
+        book.status = "reading";
+      }
+    })
+    newBookDiv.style.backgroundColor = "#9d9d9d"
+    newBookTitle.style.color = "black";
+    newBookAuthor.style.color = "black";
+    newBookPage.style.color = "black";
+    displayBook();
   })
 
   newBtn3.addEventListener('click', () => {
-  console.log("done reading button 'clicked'");
-  newBookDiv.style.backgroundColor = "#9d9d9d";
-  newBookTitle.style.color = "white";
-  newBookAuthor.style.color = "white";
-  newBookPage.style.color = "white";
+    console.log("done reading button 'clicked'");
+    myLibrary.forEach(book => {
+      if(book.id == newDiv.id){
+        book.status = "done reading";
+      }
+    })
+    newBookDiv.style.backgroundColor = "#9d9d9d";
+    newBookTitle.style.color = "white";
+    newBookAuthor.style.color = "white";
+    newBookPage.style.color = "white";
+    displayBook();
   });
 
   newBtn4.addEventListener('click', () => {
   console.log("Remove button 'clicked'");
-  newBtn4.id = newDiv.id
-  myLibrary = myLibrary.filter(book => book.id !== newBtn4.id)
+  myLibrary.filter(book => book.id !== newDiv.id)
   console.log(myLibrary);
+  displayBook();
   newDiv.remove();
   })
   
   const newBookAuthor = document.createElement('span');
   newBookAuthor.textContent = author.value;
+
   const newBookTitle = document.createElement('span');
-  newBookTitle.style.fontWeight = "bold";
-  newBookTitle.style.fontSize = "1.15rem"
+  newBookTitle.classList.add('bookStyle');
+
   newBookTitle.textContent = title.value;
   const newBookPage = document.createElement('span');
   newBookPage.textContent = pages.value;
 
-  newBookDiv.appendChild(newBookAuthor);
-  newBookDiv.appendChild(newBookTitle);
-  newBookDiv.appendChild(newBookPage);
-
+  newBookDiv.append(newBookAuthor, newBookTitle, newBookPage)
   form.reset();
+}
+
+function displayBook (){
+  myLibrary.forEach(book => {
+    console.log(book);
+  })
+}
+
+console.log(myLibrary[0].showBookInfo());
+
+addBookBtn.addEventListener('click', () => {
+  addBookToLibrary();
+  displayBook();
 })
+
